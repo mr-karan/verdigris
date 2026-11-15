@@ -1,0 +1,50 @@
+{
+  "name": "verdigris",
+  "displayName": "Verdigris",
+  "description": "Weathered stone and patinated copper. A calm colour theme in a light and a dark flavour.",
+  "version": "0.1.0",
+  "publisher": "mr-karan",
+  "license": "MIT",
+  "homepage": "https://github.com/mr-karan/verdigris",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mr-karan/verdigris.git",
+    "directory": "ports/vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/mr-karan/verdigris/issues"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "color theme",
+    "light",
+    "dark",
+    "calm",
+    "minimal",
+    "verdigris"
+  ],
+  "galleryBanner": {
+    "color": "#151a19",
+    "theme": "dark"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Verdigris Limestone",
+        "uiTheme": "vs",
+        "path": "./themes/verdigris-limestone-color-theme.json"
+      },
+      {
+        "label": "Verdigris Slate",
+        "uiTheme": "vs-dark",
+        "path": "./themes/verdigris-slate-color-theme.json"
+      }
+    ]
+  }
+}
