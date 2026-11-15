@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Render every Verdigris port from palette.json.
 
-    python3 build.py              regenerate every port
-    python3 build.py ghostty zed  regenerate the named ports
+    python3 build.py              regenerate every port and the README tables
+    python3 build.py ghostty zed  regenerate only the named ports
     python3 build.py --check      fail if a committed file is out of date
     python3 build.py --contrast   print every checked contrast pair
 
@@ -16,6 +16,7 @@ import importlib.util
 import sys
 from pathlib import Path
 
+import docs
 import palette as pal
 
 ROOT = Path(__file__).resolve().parent
@@ -70,6 +71,8 @@ def main() -> int:
     targets = {}
     for name in args.ports or known:
         targets.update(render_port(name, palette))
+    if not args.ports:
+        targets.update(docs.render(palette))
 
     stale = [path for path, text in targets.items() if not path.exists() or path.read_text() != text]
     if args.check:
