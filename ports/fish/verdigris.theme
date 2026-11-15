@@ -1,0 +1,64 @@
+# name: Verdigris
+# url: https://github.com/mr-karan/verdigris
+[light]
+# preferred_background: f3f3ee
+fish_color_normal 252d2a
+fish_color_command 2c6e64
+fish_color_keyword 2c6e64
+fish_color_param 252d2a
+fish_color_option 5c6763
+fish_color_quote 496c35
+fish_color_escape 76611b
+fish_color_operator 8f5226
+fish_color_redirection 785480
+fish_color_end 5c6763
+fish_color_error a8423f
+fish_color_comment 6f7975
+fish_color_autosuggestion 6f7975
+fish_color_cwd 2c6e64
+fish_color_cwd_root a8423f
+fish_color_user 496c35
+fish_color_host 5c6763
+fish_color_host_remote 76611b
+fish_color_status a8423f
+fish_color_search_match --background=f0d9bb
+fish_color_selection --background=cde0d9
+fish_color_valid_path --underline
+fish_color_history_current --bold
+fish_color_cancel -r
+fish_pager_color_completion 252d2a
+fish_pager_color_description 6f7975
+fish_pager_color_prefix 2c6e64 --bold --underline
+fish_pager_color_progress f3f3ee --background=2c6e64
+fish_pager_color_selected_background --background=e6e8e1
+[dark]
+# preferred_background: 151a19
+fish_color_normal d0d7d3
+fish_color_command 82c3b4
+fish_color_keyword 82c3b4
+fish_color_param d0d7d3
+fish_color_option 8e9a96
+fish_color_quote a3c18d
+fish_color_escape cabf7f
+fish_color_operator d9a377
+fish_color_redirection c0a1c9
+fish_color_end 8e9a96
+fish_color_error e38d86
+fish_color_comment 75827d
+fish_color_autosuggestion 75827d
+fish_color_cwd 82c3b4
+fish_color_cwd_root e38d86
+fish_color_user a3c18d
+fish_color_host 8e9a96
+fish_color_host_remote cabf7f
+fish_color_status e38d86
+fish_color_search_match --background=523a24
+fish_color_selection --background=26403a
+fish_color_valid_path --underline
+fish_color_history_current --bold
+fish_color_cancel -r
+fish_pager_color_completion d0d7d3
+fish_pager_color_description 75827d
+fish_pager_color_prefix 82c3b4 --bold --underline
+fish_pager_color_progress 151a19 --background=82c3b4
+fish_pager_color_selected_background --background=222a28

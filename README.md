@@ -4,7 +4,7 @@
   <img src="assets/hero.png" alt="The same Go file in Verdigris Limestone, the light flavour, and Verdigris Slate, the dark flavour" width="100%">
 </p>
 
-Verdigris is a colour theme for code in two flavours. **Limestone** is light and **Slate** is dark. One palette file drives 13 ports for editors, terminals, and command-line tools.
+Verdigris is a colour theme for code in two flavours. **Limestone** is light and **Slate** is dark. One palette file drives 14 ports for editors, terminals, and command-line tools.
 
 Verdigris is the blue-green layer that forms on copper left out in the weather, and the theme takes its colours from that. The surfaces are grey-green stone, never white and never black. Patina is the single accent. Bare copper is the one warm colour, kept for numbers, warnings, and search matches. The other hues are named after copper's minerals and its alloy: cuprite red, azurite blue, malachite green, bornite purple, and brass. Those seven hues are the whole set, so a screen of code stays quiet.
 
@@ -93,6 +93,7 @@ Both flavours define the 16 ANSI colours. The session below is a scripted transc
 | --- | --- | --- |
 | Alacritty | [`ports/alacritty`](ports/alacritty) | Two colour schemes |
 | bat, delta, Sublime Text | [`ports/bat`](ports/bat) | Two `.tmTheme` files and matching delta styles |
+| fish | [`ports/fish`](ports/fish) | One theme that follows the terminal's light or dark background |
 | fzf | [`ports/fzf`](ports/fzf) | `--color` options for bash, zsh, and fish |
 | Ghostty | [`ports/ghostty`](ports/ghostty) | Two themes |
 | Helix | [`ports/helix`](ports/helix) | Two themes |

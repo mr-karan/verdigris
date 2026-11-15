@@ -90,8 +90,9 @@ class Ports(unittest.TestCase):
         for name in build.port_names():
             rendered = "".join(build.render_port(name, changed).values())
             with self.subTest(port=name):
-                self.assertIn("#123456", rendered)
-                self.assertIn("#abcdef", rendered)
+                # Some formats, such as fish themes, write hex without the "#".
+                self.assertIn("123456", rendered)
+                self.assertIn("abcdef", rendered)
 
     def test_t3_theme_stays_within_t3_limits(self):
         theme = json.loads((ROOT / "ports" / "t3code" / "verdigris.json").read_text())
