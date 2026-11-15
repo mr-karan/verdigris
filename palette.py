@@ -82,6 +82,7 @@ class Palette:
     license: str
     homepage: str
     notes: dict
+    roles: dict
     flavours: dict
 
     @property
@@ -150,7 +151,7 @@ def load(path: Path = ROOT / "palette.json") -> Palette:
     return Palette(
         name=raw["name"], version=raw["version"], description=raw["description"],
         author=raw["author"], license=raw["license"], homepage=raw["homepage"],
-        notes=raw["notes"], flavours=flavours,
+        notes=raw["notes"], roles=roles, flavours=flavours,
     )
 
 
