@@ -161,7 +161,7 @@ def rgb(color: str) -> tuple:
 
 def mix(base: str, toward: str, amount: float) -> str:
     """A tint between two palette colours, for formats with no alpha channel."""
-    channels = (round(b + (t - b) * amount) for b, t in zip(rgb(base), rgb(toward)))
+    channels = (round(b + (t - b) * amount) for b, t in zip(rgb(base), rgb(toward), strict=True))
     return "#%02x%02x%02x" % tuple(channels)
 
 
@@ -218,34 +218,38 @@ class Pair:
         return self.ratio >= self.minimum
 
 
+def flavour_pairs(flavour: Flavour) -> list:
+    pairs = []
+
+    def add(label: str, fg: str, bg: str, minimum: float) -> None:
+        pairs.append(Pair(flavour.key, label, fg, bg, minimum, contrast(fg, bg)))
+
+    for minimum, fgs, bgs, what in COLOR_RULES:
+        for fg in fgs:
+            for bg in bgs:
+                add(f"{what}: {fg} on {bg}", flavour[fg], flavour[bg], minimum)
+    for role, style in flavour.syntax.items():
+        minimum = QUIET if role in QUIET_SYNTAX else TEXT
+        for bg in ("bg", "bg_dim", "fill_soft"):
+            add(f"syntax {role} on {bg}", style.color, flavour[bg], minimum)
+    background = flavour.terminal["background"]
+    for name in ANSI:
+        if name in ANSI_BACKGROUND:
+            continue
+        minimum = QUIET if name in QUIET_ANSI else TEXT
+        add(f"ansi {name} on terminal background", flavour.ansi[name], background, minimum)
+    add("ansi white on black", flavour.ansi["white"], flavour.ansi["black"], TEXT)
+    add("terminal foreground", flavour.terminal["foreground"], background, TEXT)
+    add("terminal foreground on selection", flavour.terminal["selection_foreground"],
+        flavour.terminal["selection_background"], TEXT)
+    add("terminal cursor", flavour.terminal["cursor"], background, UI)
+    add("text under the cursor", flavour.terminal["cursor_text"], flavour.terminal["cursor"], TEXT)
+    return pairs
+
+
 def contrast_pairs(palette: Palette) -> list:
     """Every checked pair, in a stable order."""
-    pairs = []
-    for flavour in palette.flavours.values():
-        def add(label: str, fg: str, bg: str, minimum: float) -> None:
-            pairs.append(Pair(flavour.key, label, fg, bg, minimum, contrast(fg, bg)))
-
-        for minimum, fgs, bgs, what in COLOR_RULES:
-            for fg in fgs:
-                for bg in bgs:
-                    add(f"{what}: {fg} on {bg}", flavour[fg], flavour[bg], minimum)
-        for role, style in flavour.syntax.items():
-            minimum = QUIET if role in QUIET_SYNTAX else TEXT
-            for bg in ("bg", "bg_dim", "fill_soft"):
-                add(f"syntax {role} on {bg}", style.color, flavour[bg], minimum)
-        background = flavour.terminal["background"]
-        for name in ANSI:
-            if name in ANSI_BACKGROUND:
-                continue
-            minimum = QUIET if name in QUIET_ANSI else TEXT
-            add(f"ansi {name} on terminal background", flavour.ansi[name], background, minimum)
-        add("ansi white on black", flavour.ansi["white"], flavour.ansi["black"], TEXT)
-        add("terminal foreground", flavour.terminal["foreground"], background, TEXT)
-        add("terminal foreground on selection", flavour.terminal["selection_foreground"],
-            flavour.terminal["selection_background"], TEXT)
-        add("terminal cursor", flavour.terminal["cursor"], background, UI)
-        add("text under the cursor", flavour.terminal["cursor_text"], flavour.terminal["cursor"], TEXT)
-    return pairs
+    return [pair for flavour in palette.flavours.values() for pair in flavour_pairs(flavour)]
 
 
 def contrast_failures(palette: Palette) -> list:

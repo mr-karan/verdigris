@@ -67,7 +67,7 @@ def delta_feature(flavour) -> str:
         f'\tline-numbers-right-style = "{flavour["line"]}"',
         f'\tfile-style = "{flavour["fg_strong"]}" bold',
         f'\tfile-decoration-style = "{flavour["line"]}" ul',
-        f'\thunk-header-style = file line-number syntax',
+        '\thunk-header-style = file line-number syntax',
         f'\thunk-header-file-style = "{flavour["fg_muted"]}"',
         f'\thunk-header-line-number-style = "{flavour["copper"]}"',
         f'\thunk-header-decoration-style = "{flavour["line"]}" box',
@@ -76,8 +76,8 @@ def delta_feature(flavour) -> str:
         f'\tblame-palette = "{flavour["bg"]}" "{flavour["bg_dim"]}" "{flavour["fill_soft"]}" "{flavour["fill"]}"',
         f'\tmerge-conflict-ours-diff-header-style = "{flavour["azurite"]}" bold',
         f'\tmerge-conflict-theirs-diff-header-style = "{flavour["bornite"]}" bold',
-        f'\tmerge-conflict-begin-symbol = "~"',
-        f'\tmerge-conflict-end-symbol = "~"',
+        '\tmerge-conflict-begin-symbol = "~"',
+        '\tmerge-conflict-end-symbol = "~"',
     ]
     return "\n".join(lines) + "\n"
 
