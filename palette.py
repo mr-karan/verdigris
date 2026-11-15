@@ -158,6 +158,12 @@ def rgb(color: str) -> tuple:
     return tuple(int(color[i : i + 2], 16) for i in (1, 3, 5))
 
 
+def mix(base: str, toward: str, amount: float) -> str:
+    """A tint between two palette colours, for formats with no alpha channel."""
+    channels = (round(b + (t - b) * amount) for b, t in zip(rgb(base), rgb(toward)))
+    return "#%02x%02x%02x" % tuple(channels)
+
+
 def luminance(color: str) -> float:
     channels = (c / 255 for c in rgb(color))
     r, g, b = (c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in channels)
