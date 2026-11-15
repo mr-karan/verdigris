@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygments-verdigris"
+version = "0.1.0"
+description = "Weathered stone and patinated copper. A calm colour theme in a light and a dark flavour."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Karan Sharma" }]
+requires-python = ">=3.8"
+dependencies = ["pygments>=2.11"]
+
+[project.urls]
+Homepage = "https://github.com/mr-karan/verdigris"
+
+[project.entry-points."pygments.styles"]
+verdigris-limestone = "pygments_verdigris:VerdigrisLimestoneStyle"
+verdigris-slate = "pygments_verdigris:VerdigrisSlateStyle"
+
+[tool.setuptools]
+py-modules = ["pygments_verdigris"]
