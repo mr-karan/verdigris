@@ -1,0 +1,61 @@
+[colors]
+foreground = "#252d2a"
+background = "#f3f3ee"
+cursor_bg = "#2c6e64"
+cursor_fg = "#f3f3ee"
+cursor_border = "#2c6e64"
+selection_fg = "#252d2a"
+selection_bg = "#cde0d9"
+scrollbar_thumb = "#cdd0c7"
+split = "#dddfd7"
+compose_cursor = "#8f5226"
+visual_bell = "#e6e8e1"
+ansi = [
+    "#ebece6",
+    "#a8423f",
+    "#496c35",
+    "#76611b",
+    "#3d628a",
+    "#785480",
+    "#2c6e64",
+    "#252d2a",
+]
+brights = [
+    "#6f7975",
+    "#963130",
+    "#3a5c26",
+    "#665102",
+    "#2e5279",
+    "#684570",
+    "#195e55",
+    "#1e2523",
+]
+
+[colors.tab_bar]
+background = "#ebece6"
+inactive_tab_edge = "#dddfd7"
+
+[colors.tab_bar.active_tab]
+bg_color = "#f3f3ee"
+fg_color = "#1e2523"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#ebece6"
+fg_color = "#5c6763"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#e6e8e1"
+fg_color = "#252d2a"
+
+[colors.tab_bar.new_tab]
+bg_color = "#ebece6"
+fg_color = "#5c6763"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#e6e8e1"
+fg_color = "#252d2a"
+
+[metadata]
+name = "Verdigris Limestone"
+author = "Karan Sharma"
+origin_url = "https://github.com/mr-karan/verdigris"

@@ -1,0 +1,60 @@
+# Verdigris Limestone
+# https://github.com/mr-karan/verdigris
+
+[colors.primary]
+background = "#f3f3ee"
+foreground = "#252d2a"
+dim_foreground = "#5c6763"
+bright_foreground = "#1e2523"
+
+[colors.cursor]
+text = "#f3f3ee"
+cursor = "#2c6e64"
+
+[colors.vi_mode_cursor]
+text = "#f3f3ee"
+cursor = "#8f5226"
+
+[colors.selection]
+text = "#252d2a"
+background = "#cde0d9"
+
+[colors.search.matches]
+foreground = "#1e2523"
+background = "#f0d9bb"
+
+[colors.search.focused_match]
+foreground = "#f3f3ee"
+background = "#8f5226"
+
+[colors.hints.start]
+foreground = "#f3f3ee"
+background = "#8f5226"
+
+[colors.hints.end]
+foreground = "#f3f3ee"
+background = "#3d628a"
+
+[colors.footer_bar]
+foreground = "#252d2a"
+background = "#e6e8e1"
+
+[colors.normal]
+black = "#ebece6"
+red = "#a8423f"
+green = "#496c35"
+yellow = "#76611b"
+blue = "#3d628a"
+magenta = "#785480"
+cyan = "#2c6e64"
+white = "#252d2a"
+
+[colors.bright]
+black = "#6f7975"
+red = "#963130"
+green = "#3a5c26"
+yellow = "#665102"
+blue = "#2e5279"
+magenta = "#684570"
+cyan = "#195e55"
+white = "#1e2523"

@@ -1,0 +1,26 @@
+# Verdigris Limestone
+# https://github.com/mr-karan/verdigris
+
+palette = 0=#ebece6
+palette = 1=#a8423f
+palette = 2=#496c35
+palette = 3=#76611b
+palette = 4=#3d628a
+palette = 5=#785480
+palette = 6=#2c6e64
+palette = 7=#252d2a
+palette = 8=#6f7975
+palette = 9=#963130
+palette = 10=#3a5c26
+palette = 11=#665102
+palette = 12=#2e5279
+palette = 13=#684570
+palette = 14=#195e55
+palette = 15=#1e2523
+background = #f3f3ee
+foreground = #252d2a
+cursor-color = #2c6e64
+cursor-text = #f3f3ee
+selection-background = #cde0d9
+selection-foreground = #252d2a
+split-divider-color = #dddfd7

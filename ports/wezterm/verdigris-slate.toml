@@ -1,0 +1,61 @@
+[colors]
+foreground = "#d0d7d3"
+background = "#151a19"
+cursor_bg = "#82c3b4"
+cursor_fg = "#151a19"
+cursor_border = "#82c3b4"
+selection_fg = "#d0d7d3"
+selection_bg = "#26403a"
+scrollbar_thumb = "#323b39"
+split = "#29312f"
+compose_cursor = "#d9a377"
+visual_bell = "#222a28"
+ansi = [
+    "#111615",
+    "#e38d86",
+    "#a3c18d",
+    "#cabf7f",
+    "#8fb2d8",
+    "#c0a1c9",
+    "#82c3b4",
+    "#d0d7d3",
+]
+brights = [
+    "#75827d",
+    "#f8a098",
+    "#b6d4a0",
+    "#ded392",
+    "#a2c5ec",
+    "#d3b4dd",
+    "#95d6c7",
+    "#dde3df",
+]
+
+[colors.tab_bar]
+background = "#111615"
+inactive_tab_edge = "#29312f"
+
+[colors.tab_bar.active_tab]
+bg_color = "#151a19"
+fg_color = "#dde3df"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#111615"
+fg_color = "#8e9a96"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#222a28"
+fg_color = "#d0d7d3"
+
+[colors.tab_bar.new_tab]
+bg_color = "#111615"
+fg_color = "#8e9a96"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#222a28"
+fg_color = "#d0d7d3"
+
+[metadata]
+name = "Verdigris Slate"
+author = "Karan Sharma"
+origin_url = "https://github.com/mr-karan/verdigris"

@@ -1,0 +1,26 @@
+# Verdigris Slate
+# https://github.com/mr-karan/verdigris
+
+palette = 0=#111615
+palette = 1=#e38d86
+palette = 2=#a3c18d
+palette = 3=#cabf7f
+palette = 4=#8fb2d8
+palette = 5=#c0a1c9
+palette = 6=#82c3b4
+palette = 7=#d0d7d3
+palette = 8=#75827d
+palette = 9=#f8a098
+palette = 10=#b6d4a0
+palette = 11=#ded392
+palette = 12=#a2c5ec
+palette = 13=#d3b4dd
+palette = 14=#95d6c7
+palette = 15=#dde3df
+background = #151a19
+foreground = #d0d7d3
+cursor-color = #82c3b4
+cursor-text = #151a19
+selection-background = #26403a
+selection-foreground = #d0d7d3
+split-divider-color = #29312f

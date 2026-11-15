@@ -1,0 +1,60 @@
+# Verdigris Slate
+# https://github.com/mr-karan/verdigris
+
+[colors.primary]
+background = "#151a19"
+foreground = "#d0d7d3"
+dim_foreground = "#8e9a96"
+bright_foreground = "#dde3df"
+
+[colors.cursor]
+text = "#151a19"
+cursor = "#82c3b4"
+
+[colors.vi_mode_cursor]
+text = "#151a19"
+cursor = "#d9a377"
+
+[colors.selection]
+text = "#d0d7d3"
+background = "#26403a"
+
+[colors.search.matches]
+foreground = "#dde3df"
+background = "#523a24"
+
+[colors.search.focused_match]
+foreground = "#151a19"
+background = "#d9a377"
+
+[colors.hints.start]
+foreground = "#151a19"
+background = "#d9a377"
+
+[colors.hints.end]
+foreground = "#151a19"
+background = "#8fb2d8"
+
+[colors.footer_bar]
+foreground = "#d0d7d3"
+background = "#222a28"
+
+[colors.normal]
+black = "#111615"
+red = "#e38d86"
+green = "#a3c18d"
+yellow = "#cabf7f"
+blue = "#8fb2d8"
+magenta = "#c0a1c9"
+cyan = "#82c3b4"
+white = "#d0d7d3"
+
+[colors.bright]
+black = "#75827d"
+red = "#f8a098"
+green = "#b6d4a0"
+yellow = "#ded392"
+blue = "#a2c5ec"
+magenta = "#d3b4dd"
+cyan = "#95d6c7"
+white = "#dde3df"
