@@ -1,0 +1,26 @@
+[1;36mverdigris[m on [1;35mmain[m [1;32m❯[m git status -sb
+## [32mmain[m...[31morigin/main[m [ahead [32m2[m]
+ [31mM[m palette.json
+[32mA[m  ports/zed/verdigris.json
+[31m??[m ports/helix/
+
+[1;36mverdigris[m on [1;35mmain[m [1;32m❯[m python3 build.py --check
+ok: 94 generated files are current, 544 contrast pairs pass
+
+[1;36mverdigris[m on [1;35mmain[m [1;32m❯[m git log --oneline --graph -4
+* [33m8c41f2a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m feat(zed): add the theme family
+* [33m3e9b7d0[m feat(nvim): cover treesitter and LSP groups
+[31m|[m[32m\[m
+[31m|[m * [33m51d0c6e[m[33m ([m[1;31morigin/main[m[33m)[m fix(palette): raise comment contrast
+
+[1;36mverdigris[m on [1;35mmain[m [1;32m❯[m ls
+[1;34massets[m  [1;34mports[m  [1;34mtools[m  [1;32mbuild.py[m  Makefile  palette.json  README.md
+
+[1;36mverdigris[m on [1;35mmain[m [1;32m❯[m git diff palette.json
+[1mdiff --git a/palette.json b/palette.json[m
+[36m@@ -14,3 +14,3 @@[m
+         "line_strong": "#cdd0c7",
+[31m-        "fg_subtle": "#77817d",[m
+[32m+        "fg_subtle": "#6f7975",[m
+
+[1;36mverdigris[m on [1;35mmain[m [1;32m❯[m 
