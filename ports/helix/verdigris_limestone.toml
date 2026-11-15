@@ -1,0 +1,139 @@
+# Verdigris Limestone
+# https://github.com/mr-karan/verdigris
+
+"attribute" = "brass"
+"type" = "brass"
+"type.builtin" = "brass"
+"type.enum.variant" = "copper"
+"constructor" = "brass"
+"constant" = "copper"
+"constant.builtin" = "copper"
+"constant.character" = "malachite"
+"constant.character.escape" = "brass"
+"constant.numeric" = "copper"
+"string" = "malachite"
+"string.regexp" = "brass"
+"string.special" = "brass"
+"string.special.url" = { fg = "azurite", underline = { style = "line" } }
+"string.special.symbol" = "copper"
+"comment" = { fg = "fg_subtle", modifiers = ["italic"] }
+"variable" = "fg"
+"variable.builtin" = { fg = "bornite", modifiers = ["italic"] }
+"variable.parameter" = "fg"
+"variable.other.member" = "fg"
+"label" = "bornite"
+"punctuation" = "fg_muted"
+"punctuation.special" = "brass"
+"keyword" = "patina"
+"keyword.directive" = "bornite"
+"operator" = "fg_muted"
+"function" = "azurite"
+"function.macro" = "bornite"
+"function.special" = "bornite"
+"tag" = "patina"
+"namespace" = "fg"
+"markup.heading" = { fg = "patina", modifiers = ["bold"] }
+"markup.link.url" = { fg = "azurite", underline = { style = "line" } }
+"markup.raw" = "malachite"
+
+"special" = "patina"
+"markup.list" = "patina"
+"markup.bold" = { fg = "fg_strong", modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+"markup.link.label" = "azurite"
+"markup.link.text" = "azurite"
+"markup.quote" = { fg = "fg_muted", modifiers = ["italic"] }
+"diff.plus" = "malachite"
+"diff.minus" = "cuprite"
+"diff.delta" = "azurite"
+"ui.background" = { bg = "bg" }
+"ui.background.separator" = "line"
+"ui.text" = "fg"
+"ui.text.focus" = { fg = "patina", modifiers = ["bold"] }
+"ui.text.inactive" = "fg_subtle"
+"ui.text.info" = "fg"
+"ui.text.directory" = "azurite"
+"ui.cursor" = { fg = "bg", bg = "fg_muted" }
+"ui.cursor.primary" = { fg = "bg", bg = "patina" }
+"ui.cursor.match" = { bg = "selection", modifiers = ["bold"] }
+"ui.selection" = { bg = "fill" }
+"ui.selection.primary" = { bg = "selection" }
+"ui.cursorline.primary" = { bg = "fill_soft" }
+"ui.cursorline.secondary" = { bg = "fill_soft" }
+"ui.cursorcolumn.primary" = { bg = "fill_soft" }
+"ui.linenr" = "fg_subtle"
+"ui.linenr.selected" = { fg = "fg", modifiers = ["bold"] }
+"ui.gutter" = { bg = "bg" }
+"ui.statusline" = { fg = "fg", bg = "bg_dim" }
+"ui.statusline.inactive" = { fg = "fg_subtle", bg = "bg_dim" }
+"ui.statusline.normal" = { fg = "bg", bg = "patina", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "bg", bg = "malachite", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "bg", bg = "bornite", modifiers = ["bold"] }
+"ui.statusline.separator" = "line"
+"ui.bufferline" = { fg = "fg_subtle", bg = "bg_dim" }
+"ui.bufferline.active" = { fg = "fg_strong", bg = "bg", modifiers = ["bold"] }
+"ui.bufferline.background" = { bg = "bg_dim" }
+"ui.popup" = { fg = "fg", bg = "bg_raised" }
+"ui.popup.info" = { fg = "fg", bg = "bg_raised" }
+"ui.window" = "line"
+"ui.help" = { fg = "fg", bg = "bg_raised" }
+"ui.menu" = { fg = "fg", bg = "bg_raised" }
+"ui.menu.selected" = { fg = "fg_strong", bg = "fill" }
+"ui.menu.scroll" = { fg = "line_strong", bg = "bg_raised" }
+"ui.picker.header" = { fg = "fg_muted", modifiers = ["bold"] }
+"ui.virtual.ruler" = { bg = "fill_soft" }
+"ui.virtual.whitespace" = "fg_faint"
+"ui.virtual.indent-guide" = "line"
+"ui.virtual.inlay-hint" = "fg_subtle"
+"ui.virtual.wrap" = "fg_faint"
+"ui.virtual.jump-label" = { fg = "copper", modifiers = ["bold"] }
+"ui.highlight" = { bg = "fill" }
+"ui.highlight.frameline" = { bg = "copper_wash" }
+"ui.debug.breakpoint" = "cuprite"
+"ui.debug.active" = "malachite"
+"warning" = "copper"
+"error" = "cuprite"
+"info" = "azurite"
+"hint" = "patina"
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+"diagnostic.deprecated" = { modifiers = ["crossed_out"] }
+"diagnostic" = { underline = { style = "curl" } }
+"diagnostic.hint" = { underline = { color = "patina", style = "curl" } }
+"diagnostic.info" = { underline = { color = "azurite", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "copper", style = "curl" } }
+"diagnostic.error" = { underline = { color = "cuprite", style = "curl" } }
+
+[palette]
+bg_dim = "#ebece6"
+bg = "#f3f3ee"
+bg_raised = "#fbfbf8"
+fill_soft = "#ecede7"
+fill = "#e6e8e1"
+line = "#dddfd7"
+line_strong = "#cdd0c7"
+fg_faint = "#b7bbb1"
+fg_subtle = "#6f7975"
+fg_muted = "#5c6763"
+fg = "#252d2a"
+fg_strong = "#1e2523"
+patina = "#2c6e64"
+copper = "#8f5226"
+cuprite = "#a8423f"
+azurite = "#3d628a"
+malachite = "#496c35"
+brass = "#76611b"
+bornite = "#785480"
+patina_bright = "#195e55"
+cuprite_bright = "#963130"
+azurite_bright = "#2e5279"
+malachite_bright = "#3a5c26"
+brass_bright = "#665102"
+bornite_bright = "#684570"
+patina_wash = "#dcebe6"
+copper_wash = "#f4e9db"
+cuprite_wash = "#f5e5e1"
+azurite_wash = "#e3eaf1"
+malachite_wash = "#deebd8"
+selection = "#cde0d9"
+search = "#f0d9bb"
