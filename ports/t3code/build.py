@@ -1,17 +1,16 @@
-"""Generate the Verdigris T3 Code theme file and check it against T3's limits.
+"""T3 Code theme, checked against T3's limits.
 
 Verdigris: weathered stone and patinated copper. Neutrals carry a faint
 grey-green cast, the accent is the blue-green of copper patina, and bare
 copper is the one warm note (warnings, search matches).
 
-Run: python3 -I verdigris.py out.json
+Run from the repository root: python3 build.py t3code
 """
 
 import json
 import re
-import sys
 
-NAME = "Verdigris"
+from palette import contrast, rgb
 
 ROLES = """
 canvas chrome toolbar toolbarForeground toolbarBorder toolbarControl
@@ -29,62 +28,70 @@ sidebarBorder terminalBackground terminalForeground terminalCursor
 terminalSelection terminalScrollbar terminalScrollbarHover
 """.split()
 
+# Roles both flavours take from palette.json.
+SHARED = {
+    "canvas": "bg", "chrome": "bg_dim", "toolbar": "bg",
+    "surfaceRaised": "bg_raised",
+    "text": "fg_strong", "textMuted": "fg_muted",
+    "border": "line", "input": "line_strong", "focus": "patina", "accent": "patina",
+    "secondary": "fill", "muted": "fill_soft",
+    "error": "cuprite", "errorSurface": "cuprite_wash",
+    "warning": "copper", "warningSurface": "copper_wash",
+    "update": "azurite", "updateSurface": "azurite_wash",
+    "accentSurface": "patina_wash",
+    "messageForeground": "fg_strong", "codeForeground": "fg",
+    "searchMatchBackground": "search",
+    "sidebar": "bg_dim",
+    "terminalForeground": "fg", "terminalCursor": "patina",
+    "terminalSelection": "selection", "terminalScrollbarHover": "fg_faint",
+}
+
+# The rest is tuned per flavour. A name is a palette.json colour; a hex is a
+# tint only T3's chrome needs, so it lives here and not in the palette.
+
 # Limestone: a soft grey-green paper, never white.
 LIGHT = {
-    "canvas": "#f3f3ee", "chrome": "#ebece6",
-    "toolbar": "#f3f3ee", "toolbarForeground": "#2a322f", "toolbarBorder": "#dddfd7",
+    "toolbarForeground": "#2a322f", "toolbarBorder": "line",
     "toolbarControl": "#fafaf7", "toolbarControlForeground": "#2a322f", "toolbarControlHover": "#e5e7e0",
-    "surface": "#f7f7f3", "surfaceRaised": "#fbfbf8", "surfaceOverlay": "#fcfcfa",
-    "text": "#1e2523", "textMuted": "#5c6763",
-    "border": "#dddfd7", "input": "#cdd0c7", "focus": "#2c6e64",
-    "accent": "#2c6e64", "accentForeground": "#f6fbf9",
-    "secondary": "#e6e8e1", "secondaryForeground": "#2a322f",
-    "muted": "#ecede7", "mutedForeground": "#5c6763",
+    "surface": "#f7f7f3", "surfaceOverlay": "#fcfcfa",
+    "accentForeground": "#f6fbf9",
+    "secondaryForeground": "#2a322f", "mutedForeground": "fg_muted",
     "placeholder": "#77817d", "secondaryLabel": "#4e5955", "iconMuted": "#77817d",
-    "error": "#a8423f", "errorForeground": "#fffaf8", "errorSurface": "#f5e5e1",
-    "warning": "#8f5226", "warningForeground": "#fffaf5", "warningSurface": "#f4e9db",
-    "update": "#3d628a", "updateForeground": "#f8fbfe", "updateSurface": "#e3eaf1",
-    "accentSurface": "#dcebe6", "accentSurfaceForeground": "#1f564d",
-    "messageSurface": "#e8eae3", "messageForeground": "#1e2523",
+    "errorForeground": "#fffaf8", "warningForeground": "#fffaf5", "updateForeground": "#f8fbfe",
+    "accentSurfaceForeground": "#1f564d",
+    "messageSurface": "#e8eae3",
     "messageAction": "#dfe1d9", "messageActionForeground": "#2a322f", "messageActionHover": "#d5d8cf",
-    "codeBackground": "#eaebe5", "codeForeground": "#252d2a",
-    "searchMatchBackground": "#f0d9bb", "searchMatchForeground": "#2a1c0e",
+    "codeBackground": "#eaebe5",
+    "searchMatchForeground": "#2a1c0e",
     "searchMatchActiveBackground": "#cf9160", "searchMatchActiveForeground": "#1d1206",
-    "sidebar": "#ebece6", "sidebarForeground": "#2a322f", "sidebarMutedForeground": "#586360",
+    "sidebarForeground": "#2a322f", "sidebarMutedForeground": "#586360",
     "sidebarControlSurface": "#e3e5de", "sidebarRowHover": "#e3e5de",
-    "sidebarRowActive": "#dcdfd7", "sidebarRowSelected": "#d9e6e1", "sidebarBorder": "#dddfd7",
-    "terminalBackground": "#eff0ea", "terminalForeground": "#252d2a", "terminalCursor": "#2c6e64",
-    "terminalSelection": "#cde0d9", "terminalScrollbar": "#cdd0c7", "terminalScrollbarHover": "#b7bbb1",
+    "sidebarRowActive": "#dcdfd7", "sidebarRowSelected": "#d9e6e1", "sidebarBorder": "line",
+    "terminalBackground": "#eff0ea", "terminalScrollbar": "line_strong",
 }
 
-# Patina at night: deep green-grey slate, never black.
+# Slate: deep green-grey, never black.
 DARK = {
-    "canvas": "#151a19", "chrome": "#111615",
-    "toolbar": "#151a19", "toolbarForeground": "#c6cfcb", "toolbarBorder": "#252d2b",
-    "toolbarControl": "#1b2120", "toolbarControlForeground": "#d0d7d3", "toolbarControlHover": "#232b29",
-    "surface": "#191f1e", "surfaceRaised": "#1e2524", "surfaceOverlay": "#222a28",
-    "text": "#dde3df", "textMuted": "#8e9a96",
-    "border": "#29312f", "input": "#323b39", "focus": "#82c3b4",
-    "accent": "#82c3b4", "accentForeground": "#0b1b17",
-    "secondary": "#222a28", "secondaryForeground": "#d0d7d3",
-    "muted": "#1b2120", "mutedForeground": "#8a9692",
-    "placeholder": "#727e7a", "secondaryLabel": "#9ea9a5", "iconMuted": "#75827d",
-    "error": "#e38d86", "errorForeground": "#230c0a", "errorSurface": "#2e1c1a",
-    "warning": "#d9a377", "warningForeground": "#221306", "warningSurface": "#2c231a",
-    "update": "#8fb2d8", "updateForeground": "#0a1522", "updateSurface": "#1a2530",
-    "accentSurface": "#1a2d29", "accentSurfaceForeground": "#a5d8cb",
-    "messageSurface": "#1f2625", "messageForeground": "#dde3df",
+    "toolbarForeground": "#c6cfcb", "toolbarBorder": "#252d2b",
+    "toolbarControl": "fill_soft", "toolbarControlForeground": "fg", "toolbarControlHover": "#232b29",
+    "surface": "#191f1e", "surfaceOverlay": "fill",
+    "accentForeground": "#0b1b17",
+    "secondaryForeground": "fg", "mutedForeground": "#8a9692",
+    "placeholder": "#727e7a", "secondaryLabel": "#9ea9a5", "iconMuted": "fg_subtle",
+    "errorForeground": "#230c0a", "warningForeground": "#221306", "updateForeground": "#0a1522",
+    "accentSurfaceForeground": "#a5d8cb",
+    "messageSurface": "#1f2625",
     "messageAction": "#262e2c", "messageActionForeground": "#c9d1cd", "messageActionHover": "#2e3735",
-    "codeBackground": "#101514", "codeForeground": "#d0d7d3",
-    "searchMatchBackground": "#523a24", "searchMatchForeground": "#f6e7d6",
-    "searchMatchActiveBackground": "#d9a377", "searchMatchActiveForeground": "#221306",
-    "sidebar": "#111615", "sidebarForeground": "#c0c9c5", "sidebarMutedForeground": "#87938f",
+    "codeBackground": "#101514",
+    "searchMatchForeground": "#f6e7d6",
+    "searchMatchActiveBackground": "copper", "searchMatchActiveForeground": "#221306",
+    "sidebarForeground": "#c0c9c5", "sidebarMutedForeground": "#87938f",
     "sidebarControlSurface": "#181e1d", "sidebarRowHover": "#181e1d",
     "sidebarRowActive": "#1d2423", "sidebarRowSelected": "#1a2925", "sidebarBorder": "#1c2221",
-    "terminalBackground": "#101514", "terminalForeground": "#d0d7d3", "terminalCursor": "#82c3b4",
-    "terminalSelection": "#26403a", "terminalScrollbar": "#2b3432", "terminalScrollbarHover": "#3a4543",
+    "terminalBackground": "#101514", "terminalScrollbar": "#2b3432",
 }
 
+# @flavour.colour@ is a palette.json colour, @flavour.colour.rgb@ its channels.
 CSS = """
 /* Verdigris: stone and copper patina. Only T3's documented stable selectors. */
 :root {
@@ -95,16 +102,16 @@ CSS = """
   --font-mono: var(--vg-mono);
 }
 :root:not(.dark) {
-  --vg-accent: #2c6e64; --vg-copper: #8f5226; --vg-line: #dddfd7; --vg-line-soft: #e6e8e1;
-  --vg-ink: #1e2523; --vg-quiet: #5c6763; --vg-chip: #e6e8e1;
-  --vg-wash: rgba(44, 110, 100, 0.045);
+  --vg-accent: @light.patina@; --vg-copper: @light.copper@; --vg-line: @light.line@; --vg-line-soft: @light.fill@;
+  --vg-ink: @light.fg_strong@; --vg-quiet: @light.fg_muted@; --vg-chip: @light.fill@;
+  --vg-wash: rgba(@light.patina.rgb@, 0.045);
   --vg-shadow: 0 1px 2px rgba(30, 40, 36, 0.05), 0 10px 28px -6px rgba(30, 40, 36, 0.10);
   --vg-lift: 0 1px 2px rgba(30, 40, 36, 0.04), 0 4px 14px -4px rgba(30, 40, 36, 0.07);
 }
 .dark {
-  --vg-accent: #82c3b4; --vg-copper: #d9a377; --vg-line: #29312f; --vg-line-soft: #212827;
-  --vg-ink: #dde3df; --vg-quiet: #8e9a96; --vg-chip: #232b29;
-  --vg-wash: rgba(130, 195, 180, 0.035);
+  --vg-accent: @dark.patina@; --vg-copper: @dark.copper@; --vg-line: @dark.line@; --vg-line-soft: #212827;
+  --vg-ink: @dark.fg_strong@; --vg-quiet: @dark.fg_muted@; --vg-chip: #232b29;
+  --vg-wash: rgba(@dark.patina.rgb@, 0.035);
   --vg-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 14px 34px -8px rgba(0, 0, 0, 0.45);
   --vg-lift: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 18px -6px rgba(0, 0, 0, 0.35);
 }
@@ -317,17 +324,6 @@ PAIRS = [
 ]
 
 
-def luminance(color: str) -> float:
-    channels = (int(color[i : i + 2], 16) / 255 for i in (1, 3, 5))
-    r, g, b = (c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in channels)
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b
-
-
-def contrast(fg: str, bg: str) -> float:
-    hi, lo = sorted((luminance(fg), luminance(bg)), reverse=True)
-    return (hi + 0.05) / (lo + 0.05)
-
-
 def check_palette(name: str, palette: dict) -> None:
     missing, extra = set(ROLES) - set(palette), set(palette) - set(ROLES)
     assert not missing and not extra, f"{name}: missing {sorted(missing)}, extra {sorted(extra)}"
@@ -346,41 +342,48 @@ def check_css(css: str) -> None:
     assert len(css) <= 20_000, f"css is {len(css)} chars"
 
 
-def contrast_table() -> list:
+def contrast_failures(light: dict, dark: dict) -> list:
     failures = []
-    print(f"{'pair':<30}{"fg on bg":<58}{'min':>5}{'light':>8}{'dark':>8}")
     for fg, bg, minimum, label in PAIRS:
-        ratios = [contrast(p[fg], p[bg]) for p in (LIGHT, DARK)]
-        flags = ["" if r >= minimum else "!" for r in ratios]
-        print(f"{label:<30}{fg + " / " + bg:<58}{minimum:>5.1f}"
-              f"{ratios[0]:>7.2f}{flags[0] or ' '}{ratios[1]:>7.2f}{flags[1] or ' '}")
-        for mode, ratio in zip(("light", "dark"), ratios):
+        for mode, colors in (("light", light), ("dark", dark)):
+            ratio = contrast(colors[fg], colors[bg])
             if ratio < minimum:
                 failures.append(f"{mode}: {label} ({fg} on {bg}) is {ratio:.2f}, needs {minimum}")
     return failures
 
 
-def main() -> None:
-    if len(sys.argv) != 2:
-        sys.exit("usage: python3 -I verdigris.py out.json")
-    check_palette("light", LIGHT)
-    check_palette("dark", DARK)
+def resolve(name: str, flavour, tints: dict) -> dict:
+    assert not set(SHARED) & set(tints), f"{name}: defined twice: {sorted(set(SHARED) & set(tints))}"
+    colors = {
+        role: ref if ref.startswith("#") else flavour[ref]
+        for role, ref in {**SHARED, **tints}.items()
+    }
+    check_palette(name, colors)
+    return {role: colors[role] for role in ROLES}
+
+
+def fill_css(css: str, palette) -> str:
+    def color(match: re.Match) -> str:
+        value = getattr(palette, match[1])[match[2]]
+        return ", ".join(map(str, rgb(value))) if match[3] else value
+
+    return re.sub(r"@(light|dark)\.(\w+?)(\.rgb)?@", color, css)
+
+
+def render(palette) -> dict:
+    light, dark = resolve("light", palette.light, LIGHT), resolve("dark", palette.dark, DARK)
+    css = fill_css(CSS, palette)
     assert len(ROLES) == 61 and len(set(ROLES)) == 61, len(ROLES)
-    assert len(NAME) <= 48
-    check_css(CSS)
-    failures = contrast_table()
+    assert len(palette.name) <= 48
+    check_css(css)
+    failures = contrast_failures(light, dark)
     if failures:
-        sys.exit("contrast failures:\n  " + "\n  ".join(failures))
+        raise SystemExit("t3code contrast failures:\n  " + "\n  ".join(failures))
     theme = {
-        "version": 1, "name": NAME, "appearance": "light",
-        "colors": LIGHT, "variants": {"dark": DARK}, "css": CSS,
+        "version": 1, "name": palette.name, "appearance": "light",
+        "colors": light, "variants": {"dark": dark}, "css": css,
     }
     out = json.dumps(theme, indent=2) + "\n"
     size = len(out.encode())
     assert size <= 32 * 1024, f"file is {size} bytes"
-    with open(sys.argv[1], "w") as f:
-        f.write(out)
-    print(f"\n{NAME}: {len(ROLES)} roles per mode, css {len(CSS)} chars, file {size} bytes -> {sys.argv[1]}")
-
-
-main()
+    return {"verdigris.json": out}
